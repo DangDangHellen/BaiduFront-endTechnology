@@ -16,3 +16,7 @@ This Repository mainly contains the tasks I have finished in Baidu Institut of  
     2. 将左右样式调好之后，为了使包含左右浮动的box不会高度塌陷，所以要给其设置overflow:hidden，将其变成一个BFC；
     3. 接下来设置中间的自适应宽度盒子，首先将其设了float:left，发现它会占满剩余的空间，而将右浮动的盒子挤到下一行去，因此中间的盒子不能设置左浮动；
     4. 所以将中间的盒子放到右浮动元素后面，并设置一定大小的margin值（如果放在右浮动的盒子之前，右浮动的盒子还是会在下一行）
+
+
+    Task4-定位
+    注意：对于绝对定位，它是相对于最近的非static元素的定位。
