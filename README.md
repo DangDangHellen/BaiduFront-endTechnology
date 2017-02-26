@@ -20,3 +20,7 @@ This Repository mainly contains the tasks I have finished in Baidu Institut of  
 
     Task4-定位
     注意：对于绝对定位，它是相对于最近的非static元素的定位。
+
+    Task5-浮动的应用
+    设置最后一个article为侧边栏时，利用了右浮动，并将侧边栏放置在body的最开始，设置浮动之后，后面的article都会提前。
+    另外，设置两种article的宽度，百分比设置，使得两者之间的间隙看起来差不多。
