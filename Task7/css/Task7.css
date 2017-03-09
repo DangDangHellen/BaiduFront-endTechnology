@@ -2,7 +2,7 @@
 * @Author: hellen
 * @Date:   2017-02-27 23:06:42
 * @Last Modified by:   hellen
-* @Last Modified time: 2017-03-08 21:35:02
+* @Last Modified time: 2017-03-09 10:49:08
 */
 body{
 	margin:0px;
@@ -168,10 +168,83 @@ header .Login{
 
 .article_last .cont{
 	overflow:hidden;
+	padding:100px;
 }
 
 .article_last .aside{
 	float:left;
+}
+
+.article_last .title span{
+	padding-bottom:6px;
+	border-bottom:3px solid rgba(247, 63, 9, 0.88);
+}
+.title p:nth-Child(2){
+	font-size: xx-small;
+	width:446px;
+	margin:0px auto;
+	line-height:1.5em;
+	color:rgb(100,100,100);
+}
+
+.cont .aside p{
+	font-family:"黑体";
+	text-align:left;
+	width:400px;
+	margin:10px auto;
+
+}
+
+.cont .aside .sp{
+	font-size:12px;
+	line-height:1.8em;
+	color:grey;
+}
+
+.cont .aside span{
+	color:grey;
+	margin-left:330px;
+	font-size:10px;
+}
+
+.cont .aside span::before{
+	content:"\25BF";
+}
+
+
+.cont .Form{
+	margin-top:4px;
+}
+
+.cont .Form input{
+	height:30px;
+	margin-left:11px;
+
+	width: 260px;
+    border: 1px solid white;
+    background-color: rgba(200,200,200,0.5);
+    border-radius: 4px;
+    padding-left: 10px;
+    color: rgb(100,100,100);
+    font-size: 1px;
+}
+.cont .Form div{
+	margin-bottom:13px;
+}
+
+.cont .Form textarea{
+	border-color: white;
+    background-color: rgba(200,200,200,0.5);
+    border-radius: 3px;
+    width: 539px;
+    margin-left: 11px;
+    color: gray;
+    padding: 6px 10px;
+}
+
+.cont .Form input[type="button"]{
+	width:563px;
+	margin-left:11px;
 }
 
 footer{
