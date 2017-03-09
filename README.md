@@ -31,3 +31,7 @@ This Repository mainly contains the tasks I have finished in Baidu Institut of  
     但存在一个问题：
     即当页面足够大时，显示正常；当页面缩小之后，图片大小还是原来的大小，可是其他的盒子宽度只是页面的宽度。后来找到原因：是因为整体的盒子宽度设为width:100%，这是自适应的设置；而如果不需要自适应，将整体盒子大小设为图片宽度即可。
     另：该页面之做了大部分的效果，还需要再完善。
+
+    Task8-实现类似BootStrap的栅格布局
+    主要利用CSS3的flex布局，通过设置flex属性来调节不同盒子之间的宽度比；
+    同时利用@media screen 以及 min-width或者max-width来设置不同视口大小下的不同样式展示。

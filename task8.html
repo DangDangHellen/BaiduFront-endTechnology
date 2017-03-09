@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>任务八：响应式栅格布局</title>
+        <style>
+			.flexlayout, .layout2{
+				width:100%;
+				display:flex;
+			}
+			.flexlayout div{
+				color:red;
+				margin:20px;
+				padding-left:10px;
+				border:1px solid #999;
+				background-color:#eee;
+				height:50px;
+			}
+
+			.layout2 div{
+				color:red;
+				margin:20px;
+				padding-left:10px;
+				border:1px solid #999;
+				background-color:#eee;
+				height:50px;
+			}
+
+			.layout3{
+				width:50%;
+				display:flex;
+			}
+			.layout3 div{
+				color:red;
+				margin:20px;
+				padding-left:10px;
+				border:1px solid #999;
+				background-color:#eee;
+				height:50px;
+			}
+			.b1{
+				flex:1;
+			}
+			.b2{
+				flex:2;
+			}
+			.b3{
+				flex:3;
+			}
+			.b4{
+				flex:4;
+			}
+			.b6{
+				flex:6;
+			}
+			.b8{
+				flex:8;
+			}
+			.b12{
+				flex:12;
+			}
+
+			@media screen and (min-width: 768px) {
+				.layout2, .layout3{
+					display:none;
+				}
+			}
+			
+			@media screen and (max-width: 768px) {
+				.flexlayout{
+					display:none;
+				} 
+			}
+			
+        </style>
+    </head>
+    <body>
+    		<div class="flexlayout">
+    			<div class="b4" class="bb6">四栏</div>
+	    		<div class="b4" class="bb6">四栏</div>
+	    		<div class="b4" class="bb12">四栏</div>
+    		</div>
+    		<div class="flexlayout">
+    			<div class="b3">三栏</div>
+	    		<div class="b6">六栏</div>
+	    		<div class="b3">三栏</div>
+    		</div>
+    		<div class="flexlayout">
+    			<div class="b1" class="bb2">一栏</div>
+	    		<div class="b1" class="bb2">一栏</div>
+	    		<div class="b2" class="bb8">二栏</div>
+	    		<div class="b2" class="bb3">二栏</div>
+	    		<div class="b6" class="bb3">六栏</div>
+    		</div>
+    		<div class="layout2">
+    			<div class="b6">六栏</div>
+    			<div class="b6">六栏</div>
+    		</div>
+    		<div class="layout2">
+    			<div class="b12">十二栏</div>
+    		</div>
+    		<div class="layout2">
+    			<div class="b3">三栏</div>
+	    		<div class="b6">六栏</div>
+	    		<div class="b3">三栏</div>
+    		</div>
+    		<div class="layout2">
+    			<div class="b2">两栏</div>
+    			<div class="b2">两栏</div>
+    			<div class="b8">八栏</div>
+    		</div>
+    		<div class="layout3">
+    			<div class="b3">三栏</div>
+    			<div class="b3">三栏</div>
+    		</div>
+    </body>
+</html>
