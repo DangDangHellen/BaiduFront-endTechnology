@@ -12,3 +12,7 @@ This Repository mainly contains the tasks I have finished in Baidu Institut of  
      JavaScript任务四：
      重点在于添加时，怎么添加；appendChild()是在最后添加元素；insertBefore(insertNode，Node)是在Node之前插入insertNode节点；
      删除时怎么删，remove()是删除节点，只需改变里面的参数分别为第一个节点和最后一个节点即可。
+
+     JavaScript任务五：
+     在任务四的基础上，主要是在于字符串的处理，将其取字串，并转换为数值;
+     另外一个用了冒泡排序算法进行排序，并重新设置div的高度达到视觉上的排序效果。
