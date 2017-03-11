@@ -15,13 +15,14 @@
     	</div>
 
     	<script>
-	    	var btn1 = document.getElementById("btn1");
-	    	var btn2 = document.getElementById("btn2");
-	    	var btn3 = document.getElementById("btn3");
-	    	var btn4 = document.getElementById("btn4");
+	    	var btn1 = $("btn1");
+	    	var btn2 = $("btn2");
+	    	var btn3 = $("btn3");
+	    	var btn4 = $("btn4");
+	    	var reg = /^\d+$/;               //正则表达式，判断输入的只能为数值;
 	    	btn1.onclick = function(){
-	    		var val = document.getElementById("w_in").value;
-	    		if(val == false || parseInt(val) > 100 || parseInt(val) < 10)
+	    		var val = $("w_in").value;
+	    		if( !val || !(reg.test(val)) || parseInt(val) > 100 || parseInt(val) < 10)
 	    		{
 	    			window.alert("输入不合法，请重新输入！");
 	    		}
@@ -29,21 +30,16 @@
 	    		{
 	    			//在队头加元素时，利用insertBefore()函数，将要添加的元素添加在队列第一个元素节点前面即可;
 	    			var box = document.createElement("div");
-	    			/*box.innerText = val;*/
-	    			box.style.display = "inline-block";
-	    			box.style.width="13px"
-	    			box.style.margin = "2px";
+	    			display(box);
 	    			box.style.height = parseInt(val) + "px";
-	    			box.style.backgroundColor = "red";
-	    			box.style.verticalAlign = "bottom";
-	    			var queue = document.getElementById("queue");
+	    			var queue = $("queue");
 	    			queue.insertBefore(box, queue.firstChild);
 	    		}
 	    	}
 
 	    	btn2.onclick = function(){
-	    		var val = document.getElementById("w_in").value;
-	    		if(val == false || parseInt(val) > 100 || parseInt(val) < 10)
+	    		var val = $("w_in").value;
+	    		if( !val || !(reg.test(val)) || parseInt(val) > 100 || parseInt(val) < 10)
 	    		{
 	    			window.alert("输入不合法，请重新输入！");
 	    		}
@@ -51,20 +47,15 @@
 	    		{
 	    			//在队尾添加元素，直接利用appendChild()函数就可以实现;
 	    			var box = document.createElement("div");
-	    			/*box.innerText = val;*/
-	    			box.style.display = "inline-block";
-	    			box.style.width="13px";
-	    			box.style.margin = "2px";
+	    			display(box);
 	    			box.style.height = parseInt(val) + "px";
-	    			box.style.backgroundColor = "red";
-	    			box.style.verticalAlign = "bottom";
-	    			var queue = document.getElementById("queue");
+	    			var queue = $("queue");
 	    			queue.appendChild(box);
 	    		}
 	    	}
 	    	btn3.onclick = function(){
 	    		//删除队列中第一个元素，调用remove()，每次都删除队列的第一个元素;
-	    		var queue = document.getElementById("queue");
+	    		var queue = $("queue");
 	    		if(queue.lastChild)
 	    		{
 	    			queue.removeChild(queue.firstChild);
@@ -75,7 +66,7 @@
 	    	}
 	    	btn4.onclick = function(){
 	    		//删除队列中最后一个元素，调用remove()，每次都删除队列的lastChild;
-	    		var queue = document.getElementById("queue");
+	    		var queue = $("queue");
 	    		if(queue.lastChild)
 	    		{
 	    			queue.removeChild(queue.lastChild);
@@ -85,12 +76,26 @@
 	    		}
 	    	}
 
+	    	//将相同的样式设置封装在一个函数中去
+	    	function display(box){
+	    		box.style.display = "inline-block";
+	    		box.style.width="13px";
+	    		box.style.margin = "2px";
+	    		box.style.backgroundColor = "red";
+	    		box.style.verticalAlign = "bottom";
+	    	}
+
+
+	    	//获取元素操作封装成$()函数，类似与jQuery
+	    	function $(id){
+	    		return document.getElementById(id);
+	    	}
 	    	//对列表进行排序，利用冒泡排序;
 	    	//主要在于字符串的处理，并将字符串转换为数值；
 	    	function sortList(){
-	    		var queue = document.getElementById("queue");
+	    		var queue = $("queue");
 	    		var divs = queue.getElementsByTagName("div");
-	    		/*window.alert(divs.length);*/
+	    		
 	    		for(var i = 0;  i < divs.length - 1; i++)
 	    		{
 	    			for(var j = 0; j < divs.length - 1 - i; j++)
@@ -108,7 +113,6 @@
 	    				divs[j+1].style.height = num1 + "px";
 	    				divs[j].style.height = num + "px";
 	    			}
-	    			/*window.alert(divs[i].style.height);*/
 	    		}
 	    	}
     	</script>

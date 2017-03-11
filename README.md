@@ -16,3 +16,7 @@ This Repository mainly contains the tasks I have finished in Baidu Institut of  
      JavaScript任务五：
      在任务四的基础上，主要是在于字符串的处理，将其取字串，并转换为数值;
      另外一个用了冒泡排序算法进行排序，并重新设置div的高度达到视觉上的排序效果。
+
+     在原先基础上，修改重叠部分代码，封装在一个函数中，减少代码量；
+     另一方面，将由id获取元素的操作也封装起来。
+     利用正则表达式判断输入的数据格式，必须都为数字。
