@@ -1,72 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-    </head>
-    <body>
-    	<div>
-    		<textarea name="inputarea" id="inputarea" cols="30" rows="10"></textarea>
-    		
-    		<input type="text" id="search_content" />
-    		<input type="button" onclick="Search()" value="Search" />
-    	</div>
+<!doctype html>
+<html>
 
-    	<script>
-    		function Search(){
-    			var regexp1 = /\n/;
-    			var regexp2 = / /;
-    			var regexp3 = /、/;
-    			var regexp4 = /,/;
-    			res_content = new Array();
-    			num = 0;
-    			var content = document.getElementById("inputarea").value;
-    			window.alert(content);
-    			//将内容字符串用空格，顿号或者回车分隔开;
-    			if(regexp1.test(content))    //字符串中有回车,就以回车来分
-    			{
-    				var cons = content.split("\n");
-    				for(var i = 0; i < cons.length; i++)
-    				{
-    					res_content[num++] = cons[i];
-    				}
-    			}
-    			else if(regexp2.test(content))   //有空格，就拿空格来分
-    			{
-    				var cons = content.split(" ");
-    				for(var i = 0; i < cons.length; i++)
-    				{
-    					res_content[num++] = cons[i];
-    				}
-    			}
-    			else if(regexp3.test(content))            //有顿号，就用顿号来分
-    			{
-    				var cons = content.split("、");
-    				for(var i = 0; i < cons.length; i++)
-    				{
-    					res_content[num++] = cons[i];
-    				}
-    			}
-    			else if(regexp4.test(content))
-    			{
-    				var cons = content.split(",");
-    				for(var i = 0; i < cons.length; i++)
-    				{
-    					res_content[num++] = cons[i];
-    				}
-    			}
-    			else{
-    				res_content[num++] = content;
-    			}
+<head>
+    <meta charset="utf-8" />
+    <title>JS task 6</title>
+    <style>
+        #match{
+            font-weight:bold;
+            background-color:rgba(20,100,200,0.5);
+        }
 
+    </style>
+</head>
 
-    			for(var j = 0; j < res_content.length; j++)
-    			{
-    				if(res_content.search(regexp) != -1)
-    				{
-    					
-    				}
-    			}
-    		}
-    	</script>
-    </body>
+<body>
+    <div>
+        <textarea id="InputArea" rows="5" cols="50" ></textarea> <br />
+        <input type="text" id="SearchContent" />
+        <input type="button" id="searchBtn" value="查询" onclick="Search()" />
+    </div>
+    <div id="results">
+    </div>
+    <script>
+        //将获取元素的操作进行封装；
+        function $(id){
+            return document.getElementById(id);
+        }
+
+        //点击事件处理函数；
+        function Search(){
+            var val = $("InputArea").value;
+
+            //对输入字符串进行分割，其中的参数可以为正则表达式；
+            var cons = val.split(/[\s ,，、;]+/)
+            var s = $("SearchContent").value;
+
+            var Result = $("results");
+            var res = "";
+            for(var i = 0; i < cons.length; i++)
+            {
+                //判断每一个分割出来的字符串是否包含有要查询的字符串，利用了String的indexOf()函数
+                if(cons[i].indexOf(s) != -1)
+                {
+                    res = res + "<span id='match'>" + cons[i] + "</span>" + " ";
+                }
+                else
+                {
+                    res = res + "<span>" + cons[i] + "</span>" + " ";
+                }
+            }
+            Result.innerHTML = res;
+        }
+    </script>
+</body>
+
 </html>
