@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    	<div>
+    		<textarea name="inputarea" id="inputarea" cols="30" rows="10"></textarea>
+    		
+    		<input type="text" id="search_content" />
+    		<input type="button" onclick="Search()" value="Search" />
+    	</div>
+
+    	<script>
+    		function Search(){
+    			var regexp1 = /\n/;
+    			var regexp2 = / /;
+    			var regexp3 = /、/;
+    			var regexp4 = /,/;
+    			res_content = new Array();
+    			num = 0;
+    			var content = document.getElementById("inputarea").value;
+    			window.alert(content);
+    			//将内容字符串用空格，顿号或者回车分隔开;
+    			if(regexp1.test(content))    //字符串中有回车,就以回车来分
+    			{
+    				var cons = content.split("\n");
+    				for(var i = 0; i < cons.length; i++)
+    				{
+    					res_content[num++] = cons[i];
+    				}
+    			}
+    			else if(regexp2.test(content))   //有空格，就拿空格来分
+    			{
+    				var cons = content.split(" ");
+    				for(var i = 0; i < cons.length; i++)
+    				{
+    					res_content[num++] = cons[i];
+    				}
+    			}
+    			else if(regexp3.test(content))            //有顿号，就用顿号来分
+    			{
+    				var cons = content.split("、");
+    				for(var i = 0; i < cons.length; i++)
+    				{
+    					res_content[num++] = cons[i];
+    				}
+    			}
+    			else if(regexp4.test(content))
+    			{
+    				var cons = content.split(",");
+    				for(var i = 0; i < cons.length; i++)
+    				{
+    					res_content[num++] = cons[i];
+    				}
+    			}
+    			else{
+    				res_content[num++] = content;
+    			}
+
+
+    			for(var j = 0; j < res_content.length; j++)
+    			{
+    				if(res_content.search(regexp) != -1)
+    				{
+    					
+    				}
+    			}
+    		}
+    	</script>
+    </body>
+</html>
