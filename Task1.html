@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>表单验证一</title>
+		<meta charset="utf-8">
+		<style>
+			div{
+				width:500px;
+				margin:20px auto;
+			}
+			form{
+				width:100%;
+			}
+			label{
+				font-family:"黑体";
+				font-size:20px;
+				margin-right:30px;
+			}
+			input{
+				padding:5px;
+				font-size:20px;
+				height:30px;
+				border-radius:5px;
+				border:1px solid rgba(128, 128, 128, 0.76);
+				width:60%;
+				margin-right:30px;
+			}
+			button{
+				padding:8px;
+				vertical-align:middle;
+				font-size:20px;
+				font-family:"黑体";
+				border-radius:5px;
+				background-color:rgba(11, 95, 165, 0.86);
+				color:white;
+				border:1px solid rgba(11, 95, 165, 1);
+			}
+			p{
+				padding-left:76px;
+				margin-top:5px;
+				color:gray;
+			}
+		</style>
+		<script>
+			window.onload = function(){
+				var btn = document.getElementById("btn");
+				btn.onclick = function(){
+					/*window.alert("Form submit");*/
+					var val = document.getElementById("Name").value;
+					var mes = document.getElementById("mess");
+					//判断value值是否为空;
+					/*window.alert(val);*/
+					if(!val)
+					{
+						mes.innerText = "姓名不能为空";
+						mes.style.color="rgb(255, 0, 0)";
+						document.getElementById("Name").style.borderColor="rgb(255,0,0)";
+					}
+					else{
+						var len = val.length;
+						for(var i = 0; i < val.length; i++)
+						{
+							if(val.charCodeAt(i) > 255 || val.charCodeAt(i) < 0)
+							{
+								//是中文
+								len += 1;
+							}
+						}
+						/*window.alert(val.length);
+						window.alert(len);*/
+						if(len < 4 || len > 16)
+						{
+							mes.innerText = "必填，长度为4-16个字符";
+							mes.style.color="gray";
+							document.getElementById("Name").style.borderColor="rgba(128, 128, 128, 0.76)";
+						}
+						else{
+							mes.innerText = "名称格式正确";
+							mes.style.color="rgba(10,190,30,0.8)";
+							document.getElementById("Name").style.borderColor="rgba(10,190,30,0.8)";
+						}
+					}
+					return false;
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div>
+			<form action="#">
+				<label>名称</label>
+				<input type="text" id="Name" />
+				<button id="btn">验证</button>
+				<p id="mess">必填，长度为4-16个字符</p>
+			</form>
+		</div>
+	</body>
+</html>
