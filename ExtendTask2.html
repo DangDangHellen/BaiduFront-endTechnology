@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>表单验证二</title>
+		<meta charset="utf-8">
+		<style>
+			.out{
+				width:500px;
+				/* margin:20px auto; */
+				display:flex;
+				flex-direction:column;
+			}
+			.forms{
+				margin-bottom:10px;
+				display:flex;
+				flex-direction:row;
+				width:100%;
+			}
+			label{
+				width:120px;
+				font-family:"黑体";
+				font-size:20px;
+				margin-right:30px;
+			}
+			input{
+				padding:5px;
+				font-size:20px;
+				height:30px;
+				border-radius:5px;
+				border:1px solid rgba(128, 128, 128, 0.76);
+				margin-right:30px;
+				position:relative;
+			}
+			button{
+				padding:8px;
+				vertical-align:middle;
+				font-size:20px;
+				font-family:"黑体";
+				border-radius:5px;
+				background-color:rgba(11, 95, 165, 0.86);
+				color:white;
+				border:1px solid rgba(11, 95, 165, 1);
+				width:500px;
+			}
+			p{
+				display:none;
+				/* padding-left:76px; */
+				margin-top:5px;
+				color:gray;
+			}
+		</style>
+		<script>
+			window.onload = function(){
+				num = 0;
+				var ps = document.getElementsByTagName("input");
+				
+				for(var i = 0; i < ps.length; i++)
+				{
+					ps[i].onfocus = function(){
+						this.style.borderColor="grey";
+						var x=nextNode(this);
+						if(x.style.color == "rgb(255,0,0)")
+						{
+							this.value = "";
+						}						
+						if(this.getAttribute("id") == "Name" || this.getAttribute("id") == "Confirm")
+						{
+							this.getAttribute("id") == "Name"? x.innerText="必填，长度为4-16个字符" : x.innerText = "再次输入相同密码";
+							x.style.display="block";
+							x.style.color="gray";
+						}
+					}
+					ps[i].onblur = function(){
+						//失去焦点时，显示验证结果;
+						switch(this.getAttribute("id"))
+						{
+							case "Name":ConfirmName(this);
+								break;
+							case "PSW": ConfirmPSW(this);
+								break;
+							case "Confirm": ConfirmPSWAgain(this);
+								break;
+							case "mail": ConfirmMail(this);
+								break;
+							case "phone": ConfirmPhone(this);
+								break;
+						}
+					}
+					
+				}
+				//取当前节点的下一个元素节点
+				function nextNode(obj){
+					var x = obj.nextSibling;
+					while(x && x.nodeType != 1)
+					{
+						x = x.nextSibling;
+					}
+					return x;
+				}
+
+				function firstNode(obj){
+					var x = obj.firstChild;
+					while(x && x.nodeType != 1)
+					{
+						x = x.nextSibling;
+					}
+					return x;
+				}
+				//计算文本框中字符的总长度，包括中文字符
+				function lengths(val){
+					var len = val.length;
+					for(var i = 0; i < val.length; i++)
+					{
+						if(val.charCodeAt(i) > 255 || val.charCodeAt(i) < 0)
+						{
+							//是中文
+							len += 1;
+						}
+					}
+					return len;
+				}
+
+				//对错误输入时文本的处理
+				function ErrorShow(){
+					this.style.color = "rgb(255,0,0)";
+					this.style.display = "block";
+					//加上输入框的抖动;最后效果有些生硬
+					//首先要获取输入框;
+					var In = firstNode(this.parentNode);
+					In.style.left="5px";
+					setTimeout(function(){In.style.left="-5px";}, 50);
+				}
+
+				//对正确输入时文本的处理
+				function TrueShow(){
+					this.style.display = "block";
+					this.style.color = "rgba(10,200,30,0.6)";
+				}
+
+				//名字为空时的处理函数
+				function ConfirmName(obj){
+					var val = obj.value;
+					var x = nextNode(obj);
+					//计算名字长度
+					var len = lengths(val);
+					//名字为空时，如何处理
+					if(!val)
+					{
+						x.innerText = "姓名不能为空";
+						ErrorShow.apply(x);
+						obj.style.borderColor="rgb(255,0,0)";
+						return false;
+					}
+					//名字不符合长度要求时
+					else if(len < 4 || len > 16)
+					{
+						
+						x.innerText = "姓名不满足要求";
+						ErrorShow.apply(x);
+						obj.style.borderColor="rgb(255,0,0)";
+						return false;
+					}
+					else
+					{
+						
+						x.innerText = "姓名符合要求";
+						TrueShow.apply(x);
+						obj.style.borderColor="rgba(10,200,30,0.6)";
+						return true;
+					}
+				}
+
+				//确认密码格式正确
+				function ConfirmPSW(obj){
+					var val = obj.value;
+					var x = nextNode(obj);
+					if(!val)
+					{
+						ErrorShow.apply(x);
+						x.innerText = "请输入密码";
+						obj.style.borderColor = "rgb(255,0,0)";
+						return false;
+					}
+					else{
+						TrueShow.apply(x);
+						x.innerText = "密码格式正确";
+						obj.style.borderColor="rgba(10,200,30,0.6)";
+						return true;
+					}
+				}
+
+				//确认密码验证
+				function ConfirmPSWAgain(obj){
+					var val = obj.value;
+					var x = nextNode(obj);
+					/*window.alert(x);*/
+					var psw = document.getElementById("PSW").value;
+					if(!val || psw != val)
+					{
+						ErrorShow.apply(x);
+						x.innerText = "密码不正确";
+						obj.style.borderColor = "rgb(255,0,0)";
+						return false;
+					}
+					else
+					{
+						TrueShow.apply(x);
+						x.innerText = "密码正确";
+						obj.style.borderColor="rgba(10,200,30,0.6)";
+						return true;
+					}
+				}
+				function ConfirmMail(obj){
+					var val = obj.value;
+					/*window.alert(val);*/
+					var x = nextNode(obj);
+					//邮箱正则表达式;
+					var regexp = /^([a-zA-Z0-9])+@([A-Za-z0-9])+(\.[a-z]+)$/;
+					if(regexp.test(val))
+					{
+						TrueShow.apply(x);
+						x.innerText = "格式正确";
+						obj.style.borderColor="rgba(10,200,30,0.6)";
+						return true;
+					}
+					else
+					{
+						ErrorShow.apply(x);
+						x.innerText = "格式不正确";
+						obj.style.borderColor="rgb(255,0,0)";
+						return false;
+					}
+				}
+				function ConfirmPhone(obj){
+					var val = obj.value;
+					var x = nextNode(obj);
+					var len = val.length;
+					if(!len || len != 11 || val[0] != '1')
+					{
+						ErrorShow.apply(x);
+						x.innerText="手机格式不正确";
+						obj.style.borderColor="rgb(255,0,0)";
+						return false;
+					}
+					else
+					{
+						var flag = 0;
+						for(var i = 1; i < len; i++)
+						{
+							if(parseInt(val[i]) >= 0 && parseInt(val[i]) <= 9)
+							{
+							}
+							else
+							{
+								flag = 1;
+							}
+						}
+						if(flag == 1)
+						{
+							ErrorShow.apply(x);
+							x.innerText="手机格式不正确";
+							obj.style.borderColor="rgb(255,0,0)";
+							return false;
+						}
+						else
+						{
+							TrueShow.apply(x);
+							x.innerText = "手机格式正确";
+							obj.style.borderColor="rgba(10,200,30,0.6)";
+							return true;
+						}
+					}
+				}
+
+				//提交按钮处理函数
+				document.getElementById("btn").onclick = function(){
+					//依次验证输入框;
+					var flag = 0;
+					var ps = document.getElementsByTagName("input");
+					for(var i = 0; i < ps.length; i++)
+					{
+						/*window.alert(ps[i]);*/
+						if(!Identify(ps[i])){
+							flag = 1;
+						}
+					}
+					if(flag == 0)
+					{
+						window.alert("提交成功！");
+					}
+				}
+
+				function Identify(obj){
+					var flag;
+					switch(obj.getAttribute("id"))
+					{
+						case "Name":flag = ConfirmName(obj);
+							break;
+						case "PSW": flag = ConfirmPSW(obj);
+							break;
+						case "Confirm": flag = ConfirmPSWAgain(obj);
+							break;
+						case "mail": flag = ConfirmMail(obj);
+							break;
+						case "phone": flag = ConfirmPhone(obj);
+							break;
+					}
+					return flag;
+				}
+			};
+		</script>
+	</head>
+	<body>
+		<div id="out">
+			<div class="forms">
+				<label>名称</label>
+				<div>
+					<input type="text" id="Name" />
+					<p>必填，长度为4-16个字符</p>
+				</div>
+			</div>
+
+			<div class="forms">
+				<label>密码</label>
+				<div>
+					<input type="password" id="PSW" />
+					<p></p>
+				</div>
+			</div>
+				
+			<div class="forms">
+				<label>密码确认</label>
+				<div>
+					<input type="password" id="Confirm" />
+					<p>再次输入相同密码</p>
+				</div>
+				
+			</div>
+				
+			<div class="forms">
+				<label>邮箱</label>
+				<div>
+					<input type="text" id="mail" />
+					<p></p>
+				</div>
+				
+			</div>
+				
+			<div class="forms">
+				<label>手机</label>
+				
+				<div>
+					<input type="text" id="phone" />
+					<p></p>
+				</div>
+			</div>
+			<button id="btn">提交</button>
+		</div>
+	</body>
+</html>
