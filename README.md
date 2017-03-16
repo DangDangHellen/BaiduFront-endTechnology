@@ -15,3 +15,6 @@ This Repository mainly contains the tasks I have finished in Baidu Institut of  
      ExtendTask2-对Task2进行了一些扩展。
      1. 当输入不符合验证条件时，点击提交按钮，对应的输入框会抖动一下，引起用户的注意。（但我觉得抖动效果稍微有点生硬，暂时还没有想到利用原生JS去做）；
      2，将错误时添加的样式封装起来，并将正确时添加的样式也封装起来，由于函数内部用到了this，所以外部调用时需用apply函数改变作用域。
+
+     Task3-表单联动
+     将第一级select中的option与第二级select中的option通过class名关联起来，并且利用select的onchange事件，实现每个option对应的第二级内容，相对应的内容设display:block属性。
