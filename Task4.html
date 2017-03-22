@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>会动的小方块-类似于马里奥</title>
+        <style>
+        	#Boxs{
+        		width:800px;
+        		height:800px;
+        		background-color:rgba(10,200,30,0.6);
+        		position:relative;
+        	}
+        	/* #absoluteBox{
+        		position:absolute;
+        		top:50px;
+        		left:100px;
+        	} */
+			#box{
+				height:50px;
+				width:50px;
+				position:relative;
+				/* top:100px;
+				left:80px; */
+				transform:rotate(0deg);
+			}
+			#b{
+				position:absolute;
+				top:0px;
+				left:0px;
+				height:10px;
+				width:50px;
+				background-color:rgba(10,20,200,0.6);
+			}
+			#r{
+				position:absolute;
+				top:10px;
+				height:40px;
+				width:50px;
+				background-color:rgba(200,10,20,0.6);
+			}
+			#operation{
+				padding-left:4px;
+				font-size:15px;
+				color:rgba(20,20,20,0.6);
+				border-radius:3px;
+				border:2px solid rgba(100,20,200,0.7);
+				height:30px;
+				width:260px;
+				position:fixed;
+				top:0px;
+				right:0px;
+			}
+			#Start{
+				font-family:"黑体";
+				color:white;
+				background-color:rgba(10,20,39,0.5);
+				border-width:0px;
+				border-radius:3px;
+				height:35px;
+				width:70px;
+				position:fixed;
+				top:0px;
+				right:0px;
+			}
+        </style>
+        <script>
+        	window.onload = function(){
+        		var direction = 0;               //direction表示蓝色朝向的方向，0表示朝上，1表示朝右，2表示朝下，3表示朝左
+        		/*var numL = 0;
+        		var numR = 0;
+        		var numB = 0;*/
+        		var degs = 0;
+        		var box = document.getElementById("box");
+        		var Movebox = document.getElementById("absoluteBox");
+        		document.getElementById("Start").onclick = function(){
+        			switch(document.getElementById("operation").value)
+        			{
+        				//如果直接旋转用固定角度的话，当先让向左旋转之后，有让向右旋转胡直接变到初始状态向右旋转的状态。
+        				//因此采用角度累加的方式，就简单一些了。避免角度一直累加，让角度模360，避免不必要的页面渲染；
+        				//另一方面，记录蓝色块朝向的问题：开始想的问题是0，1，2，3分别代表上右下左，因此向相应的方向运动时，这个值应该对应的加朝向方向的数值。但后面在判断时，出现一个问题，即直接利用方向值来判断朝向了，应该利用其模4的值。
+        				//还需注意：top,left值为字符串，要先将其取数值所在的长度，然后转为整数类型即可。
+        				case "TUN LEF":
+        				{
+        					direction = direction + 3;
+        					degs = (degs -90) % 360;
+        					box.style.transform = "rotate(" + degs +"deg)";
+        					document.getElementById("operation").value = "";
+        					break;
+        				}
+        				case "TUN RIG":
+        				{
+        					direction = direction + 1;
+        					degs = (degs + 90) % 360;
+        					box.style.transform = "rotate(" + degs +"deg)";
+        					document.getElementById("operation").value = "";
+        					break;
+        				}
+        				case "TUN BAC":
+        				{
+        					direction = direction + 2;
+        					degs = (degs + 180) % 360;
+        					box.style.transform = "rotate(" + degs +"deg)";
+        					document.getElementById("operation").value = "";
+        					break;
+        				}
+        				case "GO":
+        				{
+        					if(direction % 4 == 0) //蓝色方向朝上的话
+        					{
+        						var topnum = parseInt(Movebox.style.top.substr(0, Movebox.style.top.length - 2));
+        						if(topnum < 50)
+        						{
+        							window.alert("不能超出边界");
+        						}
+        						else{
+        							topnum -= 50;
+	        						/*window.alert(Movebox.style.top.length);*/
+	        						Movebox.style.top = topnum + "px";
+        						}
+        					}
+        					else if(direction % 4 == 1)    //朝右
+        					{
+        						var leftnum = parseInt(Movebox.style.left.substr(0, Movebox.style.left.length - 2));
+        						if(leftnum > 700)
+        						{
+        							window.alert("不能超出边界");
+        						}
+        						else{
+        							leftnum += 50;
+        							Movebox.style.left = leftnum +"px";
+        						}
+        					}
+        					else if(direction % 4 == 2)    //朝下
+        					{
+        						var topnum = parseInt(Movebox.style.top.substr(0, Movebox.style.top.length - 2));
+        						if(topnum > 700)
+        						{
+        							window.alert("不能超出边界");
+        						}
+        						else{
+        							topnum += 50;
+	        						/*window.alert(Movebox.style.top.length);*/
+	        						Movebox.style.top = topnum +"px";
+        						}
+        					}
+        					else{                             //朝左
+        						var leftnum = parseInt(Movebox.style.left.substr(0, Movebox.style.left.length - 2));
+        						/*window.alert(direction);
+        						window.alert(leftnum);*/
+        						if(leftnum < 50)
+        						{
+        							window.alert("不能超出边界");
+        						}
+        						else{
+        							leftnum -= 50;
+        							Movebox.style.left = leftnum +"px";
+        						}
+        					}
+        					break;
+        				}
+
+        			}
+        		}
+        	}
+        </script>
+    </head>
+    <body>
+    	<div id="Boxs">
+    		<div id="absoluteBox" style="position:absolute; top:50px; left:100px">
+	    		<div id="box">
+		    		<div id="b"></div>
+		    		<div id="r"></div>
+		    	</div>
+	    	</div>
+    	</div>
+    	
+
+    	<input type="text" id="operation" />
+    	<button id="Start">Start</button>
+    </body>
+</html>
