@@ -19,7 +19,8 @@ This Repository mainly contains the tasks I have finished in Baidu Institut of  
      Task3-表单联动
      将第一级select中的option与第二级select中的option通过class名关联起来，并且利用select的onchange事件，实现每个option对应的第二级内容，相对应的内容设display:block属性。
 
-2017.3.22
+2017.3.22 YaoYao-Institute
+
      Task4 --会跳的小方格
      主要的问题：
      1. 关于小方格的旋转问题（注意复杂情况，即先向左旋转，再向左，又向右等等）
@@ -29,8 +30,9 @@ This Repository mainly contains the tasks I have finished in Baidu Institut of  
         开始想的问题是0，1，2，3分别代表上右下左，因此向相应的方向运动时，这个值应该对应的加朝向方向的数值。
         但后面在判断时，出现一个问题，即直接利用方向值来判断朝向了，应该利用其模4的值。
      3. 还需注意：top,left值为字符串，要先将其取数值所在的长度，然后转为整数类型即可。
+     Task1实现比较简单，给按钮增加一个点击事件，并实现点击处理函数，即验证表单输入是否合法； 
 
-    Task5-会跳的小方格2
-    1. 加入了transition动画，即让动画不会过渡的太死板；
-    2. 加入了许多新的操作，注意每个操作会导致的方向如何变化；
-    3. 将许多公共的操作封装起来。
+     Task5-会跳的小方格2
+     1. 加入了transition动画，即让动画不会过渡的太死板；
+     2. 加入了许多新的操作，注意每个操作会导致的方向如何变化；
+     3. 将许多公共的操作封装起来。
