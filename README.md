@@ -19,7 +19,6 @@ This Repository mainly contains the tasks I have finished in Baidu Institut of  
      Task3-表单联动
      将第一级select中的option与第二级select中的option通过class名关联起来，并且利用select的onchange事件，实现每个option对应的第二级内容，相对应的内容设display:block属性。
 
-
 2017.3.22
      Task4 --会跳的小方格
      主要的问题：
